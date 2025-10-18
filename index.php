@@ -104,7 +104,7 @@
         <input type="text" name="nama" required>
 
         <label>Usia:</label>
-        <input type="number" name="usia" required>
+        <input type="number" name="usia" min="0" max="20" required>
 
         <label>Jenis Kelamin:</label>
         <select name="gender">
