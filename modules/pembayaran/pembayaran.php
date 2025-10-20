@@ -332,7 +332,7 @@ function loadIntoForm(t){
     }
 
     (function(){
-      items.push({''});
+      items.push({'desc':'Contoh Layanan','price':50000,'qty':1,'type':'layanan'});
       renderItems(); calcTotal(); renderHistory();
       document.getElementById('trx-date').value = new Date().toISOString().slice(0,10);
 
