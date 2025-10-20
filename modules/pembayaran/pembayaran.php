@@ -166,7 +166,7 @@
 <body>
   <div class="container py-4 fade-section">
     <div class="d-flex justify-content-between align-items-center mb-3" data-aos="fade-down">
-      <h3>Kasir / Pembayaran</h3>
+      <h3>Pengelola Kasir</h3>
       <button id="btn-new" class="btn btn-outline-primary btn-sm">Transaksi Baru</button>
     </div>
 
