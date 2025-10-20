@@ -33,7 +33,7 @@
           </div>
           <div class="col-md-3">
             <label class="form-label">No. Telepon</label>
-            <input id="patient-phone" class="form-control" placeholder="Masukan N.Telepon" required>
+            <input id="patient-phone" class="form-control" placeholder="Masukan N. Telepon" required>
           </div>
           <div class="col-md-3">
             <label class="form-label">Nomor Rekam Medis</label>
@@ -61,9 +61,8 @@
                   <tr>
                     <th style="width:36%">Deskripsi</th>
                     <th style="width:16%">Harga (Rp)</th>
-                    <th style="width:12%">Qty</th>
+                    <th style="width:12%">Jumlah</th>
                     <th style="width:16%">Subtotal (Rp)</th>
-                    <th style="width:12%">Tipe</th>
                     <th style="width:8%">Aksi</th>
                   </tr>
                 </thead>
@@ -73,7 +72,6 @@
             </div>
           </div>
         </div>
-
         <div class="card mb-3">
           <div class="card-body d-flex justify-content-between align-items-center">
             <div>
@@ -105,16 +103,13 @@
 
             <div class="d-grid gap-2">
               <button id="btn-pay" class="btn btn-primary">Proses Pembayaran & Simpan</button>
-              <button id="btn-print" class="btn btn-outline-secondary">Cetak Nota (Fisik)</button>
-              <button id="btn-download" class="btn btn-outline-success">Download Nota (PDF)</button>
-              <button id="btn-wa" class="btn btn-success">Kirim WhatsApp</button>
             </div>
           </div>
         </div>
 
         <div class="card">
           <div class="card-body">
-            <h6>Riwayat Transaksi (Local)</h6>
+            <h6>Riwayat Transaksi</h6>
             <ul id="history" class="list-group list-group-flush small"></ul>
           </div>
         </div>
@@ -218,8 +213,8 @@
       const phone = document.getElementById('patient-phone').value.trim();
       if(!phone) return alert('Masukkan nomor telepon pasien terlebih dahulu');
       const total = calcTotal();
-      const message = `Terima kasih ${document.getElementById('patient-name').value}. Pembayaran Anda sebesar Rp ${rupiah(total)} telah kami terima. ID Transaksi: ${currentTrxId || '—'}.`;
-      const wa = `https://wa.me/${phone.replace(/\D/g,'')}?text=${encodeURIComponent(message)}`;
+      const message = Terima kasih ${document.getElementById('patient-name').value}. Pembayaran Anda sebesar Rp ${rupiah(total)} telah kami terima. ID Transaksi: ${currentTrxId || '—'}.;
+      const wa = https://wa.me/${phone.replace(/\D/g,'')}?text=${encodeURIComponent(message)};
       window.open(wa, '_blank');
     });
 
@@ -297,9 +292,9 @@ function loadIntoForm(t){
       doc.setFontSize(14); doc.text('KLINIK - NOTA PEMBAYARAN', left, y);
       y += 20;
       doc.setFontSize(10);
-      doc.text(`ID: ${trx.id}`, left, y); doc.text(`Tanggal: ${trx.date}`, 420, y);
+      doc.text(ID: ${trx.id}, left, y); doc.text(Tanggal: ${trx.date}, 420, y);
       y += 20;
-      doc.text(`Nama: ${trx.patient.name}`, left, y);
+      doc.text(Nama: ${trx.patient.name}, left, y);
       y += 20;
       doc.autoTable({
         startY: y,
@@ -314,15 +309,15 @@ function loadIntoForm(t){
 
       y = doc.lastAutoTable ? doc.lastAutoTable.finalY + 20 : 300;
       doc.setFontSize(12);
-      doc.text(`Total: Rp ${rupiah(trx.total)}`, left, y);
+      doc.text(Total: Rp ${rupiah(trx.total)}, left, y);
       y += 20;
       doc.setFontSize(9);
-      doc.text(`Metode: ${trx.method}`, left, y);
+      doc.text(Metode: ${trx.method}, left, y);
       y += 14;
-      if(trx.note) doc.text(`Catatan: ${trx.note}`, left, y);
+      if(trx.note) doc.text(Catatan: ${trx.note}, left, y);
 
       if(download){
-        doc.save(`${trx.id}.pdf`);
+        doc.save(${trx.id}.pdf);
       } else {
 
         const blob = doc.output('blob');
@@ -332,7 +327,7 @@ function loadIntoForm(t){
     }
 
     (function(){
-      items.push({'desc':'Contoh Layanan','price':50000,'qty':1,'type':'layanan'});
+      items.push({'desc':'test','price':50000,'qty':1,'type':'layanan'});
       renderItems(); calcTotal(); renderHistory();
       document.getElementById('trx-date').value = new Date().toISOString().slice(0,10);
 
