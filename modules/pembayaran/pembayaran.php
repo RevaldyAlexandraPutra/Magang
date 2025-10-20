@@ -3,15 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kasir / Pembayaran - Klinik</title>
+  <title>Pengelola Kasir</title>
 
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
   <style>
@@ -52,7 +49,6 @@
       color: #1e293b;
     }
 
-    /* Card design */
     .card {
       background: var(--card-bg);
       border: 1px solid rgba(255,255,255,0.4);
@@ -67,7 +63,6 @@
       box-shadow: 0 12px 45px rgba(0,0,0,0.15);
     }
 
-    /* Table */
     table {
       border-radius: var(--radius);
       overflow: hidden;
@@ -89,7 +84,6 @@
       transform: scale(1.01);
     }
 
-    /* Inputs */
     input.form-control, textarea, select.form-select {
       border-radius: var(--radius);
       border: 1px solid #d1d5db;
@@ -103,7 +97,7 @@
       transform: scale(1.02);
     }
 
-    /* Number input adjustments */
+
     input.item-price::-webkit-inner-spin-button,
     input.item-price::-webkit-outer-spin-button {
       -webkit-appearance: none;
@@ -154,7 +148,6 @@
       font-size: 0.9rem;
     }
 
-    /* Animasi fade & slide */
     @keyframes fadeSlide {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -164,7 +157,6 @@
       animation: fadeSlide 0.6s ease forwards;
     }
 
-    /* AOS elements */
     [data-aos] {
       opacity: 0;
       transition-property: transform, opacity;
@@ -267,7 +259,6 @@
     </div>
   </div>
 
-  <!-- JS -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
