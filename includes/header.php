@@ -25,7 +25,7 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="modules/pendaftaran/index.php">📝 Pendaftaran</a></li>
+        <li class="nav-item"><a class="nav-link" href="modules/pendaftaran/pendaftaran.php">📝 Pendaftaran</a></li>
         <li class="nav-item"><a class="nav-link" href="modules/rekam-medis/index.php">⚕️ Rekam Medis</a></li>
         <li class="nav-item"><a class="nav-link" href="modules/apotek/index.php">💊 Apotek</a></li>
         <li class="nav-item"><a class="nav-link" href="modules/pembayaran/pembayaran.php">💰 Kasir</a></li>
