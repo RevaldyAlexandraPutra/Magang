@@ -11,7 +11,7 @@
 
   <style>
     :root {
-      --soft-blue: #007aff;
+      --soft-blue: #8fc2f8ff;
       --gradient-bg: linear-gradient(160deg, #e0f2ff 0%, #f8f9ff 50%, #e8e0ff 100%);
       --card-bg: rgba(255, 255, 255, 0.75);
       --shadow: 0 10px 40px rgba(0,0,0,0.1);
@@ -21,7 +21,7 @@
     body {
       background: var(--gradient-bg);
       font-family: 'Poppins', sans-serif;
-      color: #2d3748;
+      color: #4d5e7cff;
       min-height: 100vh;
       backdrop-filter: blur(16px);
       display: flex;
@@ -61,7 +61,7 @@
     }
 
     thead th {
-      background: linear-gradient(90deg, #007aff, #4f46e5);
+      background: linear-gradient(to bottom, #0000ffff, #b9b6ffff);
       color: white;
       font-weight: 500;
       border: none;
