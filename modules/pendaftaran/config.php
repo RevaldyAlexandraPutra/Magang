@@ -6,7 +6,7 @@
 
 // Konfigurasi koneksi database
 $host = '127.0.0.1';     // Server database (biasanya localhost)
-$db   = 'sim_klinik_db'; // Nama database baru
+$db   = 'sim_klinik'; // Nama database baru
 $user = 'root';          // Username default XAMPP
 $pass = '';              // Password default XAMPP biasanya kosong
 $charset = 'utf8mb4';    // Charset yang umum digunakan
