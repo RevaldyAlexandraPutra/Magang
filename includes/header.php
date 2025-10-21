@@ -27,7 +27,7 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="modules/pendaftaran/pendaftaran.php">📝 Pendaftaran</a></li>
         <li class="nav-item"><a class="nav-link" href="rekam_form.php">⚕️ Rekam Medis</a></li>
-        <li class="nav-item"><a class="nav-link" href="modules/farmasi/index.php">💊 Apotek</a></li>
+        <li class="nav-item"><a class="nav-link" href="modules/farmasi/farmasi.php">💊 Apotek</a></li>
         <li class="nav-item"><a class="nav-link" href="modules/pembayaran/pembayaran.php">💰 Kasir</a></li>
         <li class="nav-item"><a class="nav-link" href="modules/notifikasi/index.php">📱 Notifikasi</a></li>
       </ul>
