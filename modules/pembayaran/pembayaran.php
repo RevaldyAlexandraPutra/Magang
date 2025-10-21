@@ -21,7 +21,7 @@
     body {
       background: var(--gradient-bg);
       font-family: 'Poppins', sans-serif;
-      color: #2d3748;
+      color: #4d5e7cff;
       min-height: 100vh;
       backdrop-filter: blur(16px);
       display: flex;
