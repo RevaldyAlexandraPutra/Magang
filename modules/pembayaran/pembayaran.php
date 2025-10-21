@@ -51,7 +51,7 @@
       border: 1px solid rgba(255,255,255,0.4);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(20px) saturate(160%);
+      backdrop-filter: blur(100px) saturate(160%);
       transition: all 0.4s ease;
     }
 
@@ -98,7 +98,7 @@
 
     .modal-content {
       border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(133, 133, 133, 0.8);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(255,255,255,0.4);
       box-shadow: var(--shadow);
@@ -274,7 +274,7 @@
     }
 
     function calcTotal(){
-      const total = items.reduce((s,i)=> s + ((i.price||0)*(i.qty||0)), 0);
+      const total = items.reduce((s,i)=> s + ((i.price||0)*(i.qty||1)), 0);
       totalDisplay.textContent = 'Rp ' + rupiah(total);
       return total;
     }
