@@ -6,9 +6,7 @@
   <title>Pengelola Kasir</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
   <style>
@@ -16,7 +14,6 @@
       --soft-blue: #007aff;
       --gradient-bg: linear-gradient(160deg, #e0f2ff 0%, #f8f9ff 50%, #e8e0ff 100%);
       --card-bg: rgba(255, 255, 255, 0.75);
-      --hover-bg: rgba(255, 255, 255, 0.6);
       --shadow: 0 10px 40px rgba(0,0,0,0.1);
       --radius: 20px;
     }
@@ -63,11 +60,6 @@
       box-shadow: 0 12px 45px rgba(0,0,0,0.15);
     }
 
-    table {
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-
     thead th {
       background: linear-gradient(90deg, #007aff, #4f46e5);
       color: white;
@@ -75,45 +67,6 @@
       border: none;
     }
 
-    tbody tr {
-      transition: all 0.3s ease;
-    }
-
-    tbody tr:hover {
-      background: rgba(0,122,255,0.05);
-      transform: scale(1.01);
-    }
-
-    input.form-control, textarea, select.form-select {
-      border-radius: var(--radius);
-      border: 1px solid #d1d5db;
-      transition: all 0.25s ease;
-      background: rgba(255,255,255,0.95);
-    }
-
-    input.form-control:focus, textarea:focus, select:focus {
-      border-color: var(--soft-blue);
-      box-shadow: 0 0 0 4px rgba(0,122,255,0.15);
-      transform: scale(1.02);
-    }
-
-
-    input.item-price::-webkit-inner-spin-button,
-    input.item-price::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    input.item-price {
-      -moz-appearance: textfield;
-    }
-
-    input.item-qty::-webkit-inner-spin-button,
-    input.item-qty::-webkit-outer-spin-button {
-      -webkit-appearance: inner-spin-button !important;
-    }
-
-    /* Buttons */
     .btn {
       border-radius: 14px;
       transition: all 0.25s ease-in-out;
@@ -143,23 +96,18 @@
       border: none;
     }
 
-    .small-muted {
-      color: #64748b;
-      font-size: 0.9rem;
+    .modal-content {
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.4);
+      box-shadow: var(--shadow);
+      animation: fadeSlide 0.4s ease forwards;
     }
 
     @keyframes fadeSlide {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    .fade-section {
-      animation: fadeSlide 0.6s ease forwards;
-    }
-
-    [data-aos] {
-      opacity: 0;
-      transition-property: transform, opacity;
     }
   </style>
 </head>
@@ -201,6 +149,7 @@
               <h6>Rincian Layanan & Obat</h6>
               <button id="add-row" class="btn btn-sm btn-success">Tambah Item</button>
             </div>
+
             <div class="table-responsive">
               <table class="table table-bordered table-sm align-middle" id="items-table">
                 <thead class="table-light">
@@ -215,6 +164,10 @@
                 <tbody id="items-body"></tbody>
               </table>
             </div>
+
+            <div class="text-end mt-3">
+              <button id="clear-all" class="btn btn-danger btn-sm">Hapus Semua Item</button>
+            </div>
           </div>
         </div>
 
@@ -226,7 +179,7 @@
             </div>
             <div class="text-end">
               <div class="small-muted">Total</div>
-              <h4 id="total-display">Rp 0</h4>
+              <h4 id="total-display">Rp.0</h4>
             </div>
           </div>
         </div>
@@ -236,9 +189,7 @@
         <div class="card mb-3" data-aos="fade-up">
           <div class="card-body">
             <label class="form-label">Metode Pembayaran</label>
-            <select id="payment-method" class="form-select mb-3">
-              <option value="cash">Tunai (Cash)</option>
-            </select>
+              <h6>Tunai (cash)</h6>
 
             <label class="form-label">Catatan</label>
             <textarea id="note" class="form-control mb-3" rows="3" placeholder="Opsional..."></textarea>
@@ -259,7 +210,20 @@
     </div>
   </div>
 
+  <div class="modal fade" id="confirmModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center p-4">
+        <h5 id="modalMessage" class="mb-3">Yakin ingin menghapus semua item?</h5>
+        <div class="d-flex justify-content-center gap-3">
+          <button id="modalYes" class="btn btn-danger">Ya</button>
+          <button id="modalNo" class="btn btn-secondary" data-bs-dismiss="modal">Selesai</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
 
@@ -268,16 +232,16 @@
     const itemsBody = document.getElementById('items-body');
     const totalDisplay = document.getElementById('total-display');
     const btnAdd = document.getElementById('add-row');
-    const btnPay = document.getElementById('btn-pay');
-    const historyEl = document.getElementById('history');
-    const statusEl = document.getElementById('payment-status');
+    const clearAllBtn = document.getElementById('clear-all');
+    const modalEl = new bootstrap.Modal(document.getElementById('confirmModal'));
+    const modalMessage = document.getElementById('modalMessage');
+    const modalYes = document.getElementById('modalYes');
     let items = [];
 
     function renderItems(){
       itemsBody.innerHTML = '';
       items.forEach((it, idx)=>{
         const tr = document.createElement('tr');
-        tr.style.animation = "fadeSlide 0.5s ease forwards";
         tr.innerHTML = `
           <td><input class="form-control form-control-sm item-desc" value="${it.desc||''}"></td>
           <td><input type="number" min="0" class="form-control form-control-sm item-price" value="${it.price||0}"></td>
@@ -320,7 +284,25 @@
       renderItems();
       calcTotal();
     });
+
+    clearAllBtn.addEventListener('click', ()=>{
+      if(items.length === 0){
+        modalMessage.textContent = "Tidak ada item untuk dihapus.";
+        modalYes.style.display = "none";
+        modalEl.show();
+        return;
+      }
+      modalMessage.textContent = "Yakin ingin menghapus semua item?";
+      modalYes.style.display = "inline-block";
+      modalEl.show();
+
+      modalYes.onclick = ()=>{
+        items = [];
+        renderItems();
+        calcTotal();
+        modalEl.hide();
+      };
+    });
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
