@@ -1,6 +1,6 @@
 <?php
 // save_rekam.php
-require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/db.php';
 
 // Simple helper untuk safe POST
 function post($key, $default = null) {

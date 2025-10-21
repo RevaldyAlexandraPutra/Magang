@@ -1,6 +1,6 @@
 <?php
 // rekam_form.php
-require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/db.php';
 
 // Ambil daftar pasien untuk dropdown
 $patients = $pdo->query("SELECT id, nama, phone FROM patients ORDER BY nama")->fetchAll();
