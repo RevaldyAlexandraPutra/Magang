@@ -127,7 +127,7 @@
           </div>
           <div class="col-md-3">
             <label class="form-label">No. Telepon</label>
-            <input id="patient-phone" class="form-control" placeholder="Masukan N. Telepon" required>
+            <input type="number" id="patient-phone" class="form-control" placeholder="Masukan N. Telepon" required>
           </div>
           <div class="col-md-3">
             <label class="form-label">Nomor Rekam Medis</label>
@@ -306,3 +306,4 @@
   </script>
 </body>
 </html>
+
