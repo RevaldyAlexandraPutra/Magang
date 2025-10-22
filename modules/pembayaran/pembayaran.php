@@ -98,7 +98,7 @@
 
     .modal-content {
       border-radius: var(--radius);
-      background: rgba(133, 133, 133, 0.8);
+      background: rgba(235, 235, 235, 0.8);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(255,255,255,0.4);
       box-shadow: var(--shadow);
@@ -109,13 +109,24 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Hilangkan tombol naik-turun di input number (Chrome, Safari, Edge, Opera) */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Untuk Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
   </style>
 </head>
 <body>
   <div class="container py-4 fade-section">
     <div class="d-flex justify-content-between align-items-center mb-3" data-aos="fade-down">
       <h3>Pengelola Kasir</h3>
-      <button id="btn-new" class="btn btn-outline-primary btn-sm">Transaksi Baru</button>
     </div>
 
     <div class="card mb-3" data-aos="zoom-in">
@@ -127,7 +138,16 @@
           </div>
           <div class="col-md-3">
             <label class="form-label">No. Telepon</label>
-            <input type="number" id="patient-phone" class="form-control" placeholder="Masukan N. Telepon" required>
+            <input 
+              id="patient-phone"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              class="form-control"
+              placeholder="Masukan No. Telepon"
+              required
+              oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+            >
           </div>
           <div class="col-md-3">
             <label class="form-label">Nomor Rekam Medis</label>
@@ -145,11 +165,7 @@
       <div class="col-lg-8">
         <div class="card mb-3" data-aos="fade-up">
           <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <h6>Rincian Layanan & Obat</h6>
-              <button id="add-row" class="btn btn-sm btn-success">Tambah Item</button>
-            </div>
-
+            <h6>Rincian Layanan & Obat</h6>
             <div class="table-responsive">
               <table class="table table-bordered table-sm align-middle" id="items-table">
                 <thead class="table-light">
@@ -163,10 +179,6 @@
                 </thead>
                 <tbody id="items-body"></tbody>
               </table>
-            </div>
-
-            <div class="text-end mt-3">
-              <button id="clear-all" class="btn btn-danger btn-sm">Hapus Semua Item</button>
             </div>
           </div>
         </div>
@@ -210,32 +222,14 @@
     </div>
   </div>
 
-  <div class="modal fade" id="confirmModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center p-4">
-        <h5 id="modalMessage" class="mb-3">Yakin ingin menghapus semua item?</h5>
-        <div class="d-flex justify-content-center gap-3">
-          <button id="modalYes" class="btn btn-danger">Ya</button>
-          <button id="modalNo" class="btn btn-secondary" data-bs-dismiss="modal">Selesai</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
 
-    const id = ()=> 'TRX-'+Date.now();
     const rupiah = (n)=> n.toLocaleString('id-ID');
     const itemsBody = document.getElementById('items-body');
     const totalDisplay = document.getElementById('total-display');
-    const btnAdd = document.getElementById('add-row');
-    const clearAllBtn = document.getElementById('clear-all');
-    const modalEl = new bootstrap.Modal(document.getElementById('confirmModal'));
-    const modalMessage = document.getElementById('modalMessage');
-    const modalYes = document.getElementById('modalYes');
     let items = [];
 
     function renderItems(){
@@ -278,32 +272,6 @@
       totalDisplay.textContent = 'Rp ' + rupiah(total);
       return total;
     }
-
-    btnAdd.addEventListener('click', ()=>{
-      items.push({desc:'', price:'', qty:'0'});
-      renderItems();
-      calcTotal();
-    });
-
-    clearAllBtn.addEventListener('click', ()=>{
-      if(items.length === 0){
-        modalMessage.textContent = "Tidak ada item untuk dihapus.";
-        modalYes.style.display = "none";
-        modalEl.show();
-        return;
-      }
-      modalMessage.textContent = "Yakin ingin menghapus semua item?";
-      modalYes.style.display = "inline-block";
-      modalEl.show();
-
-      modalYes.onclick = ()=>{
-        items = [];
-        renderItems();
-        calcTotal();
-        modalEl.hide();
-      };
-    });
   </script>
 </body>
 </html>
-
