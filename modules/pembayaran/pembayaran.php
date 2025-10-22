@@ -110,7 +110,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Hilangkan tombol naik-turun di input number (Chrome, Safari, Edge, Opera) */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -274,4 +273,5 @@
   </script>
 </body>
 </html>
+
 
