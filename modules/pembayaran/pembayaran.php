@@ -140,7 +140,6 @@
             <label class="form-label">No. Telepon</label>
             <input 
               id="patient-phone"
-              type="text"
               inputmode="numeric"
               pattern="[0-9]*"
               class="form-control"
@@ -275,3 +274,4 @@
   </script>
 </body>
 </html>
+
